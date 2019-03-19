@@ -195,12 +195,13 @@ trait InitializerTrait
     }
 
     /**
+     * @param array|null $columns
      * @return array
      */
-    public function toArray()
+    public function toArray(array $columns = null)
     {
         $ret = [];
-        $map = static::$initPropertiesMap;
+        $map = $columns === null ? static::$initPropertiesMap : $columns;
         foreach ($map as $key => $init) {
             if (\property_exists($this, $key)) {
                 //if there is property then it just assign value
